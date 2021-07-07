@@ -1,0 +1,18 @@
+body {background-color: blanchedalmond;
+color: darkslategray;}
+h1{ font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;   
+    font-size: xx-large;
+    text-transform: uppercase;
+    color: rgb(5, 58, 87);}
+#fotoportada{ 
+    width: 720px;
+    border-style: dotted;
+    padding: 10px;
+border-color: #aff5c6;
+}
+a:hover{
+    color: brown;
+}
+a{
+    color: rgb(46, 40, 40);
+}
