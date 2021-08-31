@@ -1,11 +1,64 @@
+const usuarios = [
+{   
+    name: "Fátima",
+    user: "usuario1",
+    pass: "12345",
+    amount: 300,
+},
+{   
+  name: "Diego",
+  user: "usuario2",
+  pass: "12345",
+  amount: 200,
+}
+];
+
+function getNameAndPass (username, key) {
+  for (let i = 0; i < users.length; i++) {
+      if (usuarios[i].user == username && usuarios[i].pass == key) {
+          var indexUser = i;
+          //document.getElementById('name').innerHTML = `${users[indexUser].name}`;
+          //document.getElementById('saldo-actual').innerHTML = `${users[indexUser].amount}`;
+          return true;
+      }
+  } return false
+}
+function validacion() {
+  var usuario = document.getElementById("exampleInputUser").value
+  var contraseña = document.getElementById("exampleInputPassword").value
+  if (getNameAndPass(usuario, contraseña)) {
+      window.alert ("Inicio exitoso");
+      window.location.replace ("usuario1.html");
+  } else {
+      alert ("Ingrese usuario y contraseña válidos");
+  }
+}
+
+/*function validacion() {
+  var usuario = document.getElementById("exampleInputUser").value
+  var contraseña = document.getElementById("exampleInputPassword").value
+
+  for (var i = 0; i < usuarios.length; i++) {
+    if(usuario == usuarios[i].user && contraseña == usuarios[i].pass) {
+      window.alert ("Inicio exitoso");
+      window.location = "usuario1.html";
+      usuarios = usuarios[i];
+      break;
+    }else{
+      alert('Ingrese usuario y contraseña válidos');
+    }
+ }
+}*/
+
+/*
 function validacion() {
     var usuario = document.getElementById("exampleInputUser").value
     var contraseña = document.getElementById("exampleInputPassword").value
 
-    if (usuario == "usuario1" && contraseña == "12345"){
+    if (usuario == usuarios.user && contraseña == usuarios.pass){
       window.alert ("Inicio exitoso");
       window.location = "usuario1.html";
-    } else if (usuario == "usuario2" && contraseña == "12345"){
+    } else if (usuario == "usuario4" && contraseña == "12345"){
         window.alert ("Inicio exitoso");
         window.location.replace ("usuario2.html");
     } else if (usuario == "usuario3" && contraseña == "12345"){
@@ -16,14 +69,10 @@ function validacion() {
       alert ("Ingrese usuario y contraseña válidos")
     }
   }
+*/
 
-  const usuario1 = 
-    {   
-        name: "Fátima",
-        amount: 300,
-    }  
-document.getElementById("name").innerHTML = usuario1.name;
-document.getElementById("saldo-actual").innerHTML = usuario1.amount;
+  document.getElementById("name").innerHTML = usuarios.name;
+  document.getElementById("saldo-actual").innerHTML = usuarios.amount;
 
 //Boton Depósito event handler
 const deposito_btn = document.getElementById('depositar');
