@@ -17,12 +17,13 @@ function getNameAndPass (username, key) {
   for (let i = 0; i < users.length; i++) {
       if (usuarios[i].user == username && usuarios[i].pass == key) {
           var indexUser = i;
-          //document.getElementById('name').innerHTML = `${users[indexUser].name}`;
-          //document.getElementById('saldo-actual').innerHTML = `${users[indexUser].amount}`;
+          document.getElementById('name').innerHTML = `${users[indexUser].name}`;
+          document.getElementById('saldo-actual').innerHTML = `${users[indexUser].amount}`;
           return true;
       }
   } return false
 }
+localStorage.setItem(indexUser);
 function validacion() {
   var usuario = document.getElementById("exampleInputUser").value
   var contraseña = document.getElementById("exampleInputPassword").value

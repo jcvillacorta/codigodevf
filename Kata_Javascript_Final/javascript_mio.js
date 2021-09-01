@@ -1,39 +1,26 @@
-const usuario1 = [
+const usuario1 =
     {   
         name: "Fátima",
         user: "usuario1",
         pass: "12345",
         amount: 300,
-    },
-    {   
-        name: "Diego",
-        user: "usuario2",
-        pass: "12345",
-        amount: 200,
     }
-]
     
 function validacion() {
     var usuario = document.getElementById("exampleInputUser").value
     var contraseña = document.getElementById("exampleInputPassword").value
     
-    if (usuario == usuario1[0].user && contraseña == usuario1[0].pass){
+    if (usuario == usuario1.user && contraseña == usuario1.pass){
         window.alert ("Inicio exitoso");
         window.location = "usuario1.html";
-        } else if (usuario == usuario1[1].user && contraseña == usuario1[1].pass){
-            window.alert ("Inicio exitoso");
-            window.location.replace ("usuario2.html");
-        } else if (usuario == "usuario3" && contraseña == "12345"){
-            window.alert ("Inicio exitoso");
-            window.location.replace ("usuario3.html");
-        }
+        } 
         else {
           alert ("Ingrese usuario y contraseña válidos")
         }
       }
-    
-    //  document.getElementById("name").innerHTML = usuario1[0].name;
-    //  document.getElementById("saldo-actual").innerHTML = usuario1[0].amount;
+
+ document.getElementById("name").innerHTML = usuario1.name;
+ document.getElementById("saldo-actual").innerHTML = usuario1.amount;
     
     //Boton Depósito event handler
     const deposito_btn = document.getElementById('depositar');
