@@ -56,8 +56,8 @@ function validacion() {
       //window.alert ("Inicio exitoso");
       window.location = "usuario1.html";
       console.log(obtenerLocalStorage(key='indexUser'));
-  } else {
-    document.getElementById('wrong').innerHTML = "Ingrese usuario y contraseña válidos";
+  } else { 
+    document.getElementById("wrong").innerHTML = "Ingrese usuario y contraseña válidos.";
      // alert ("Ingrese usuario y contraseña válidos");
   }
 }
