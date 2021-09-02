@@ -4,24 +4,28 @@ const users = [
       nombre: "Fátima",
       password: "1234",
       amount: 300,
+      genero: "mujer",
   },
   {
       name: "Diego123",
       nombre: "Diego",
       password: '1234',
-      amount: 300,
+      amount: 400,
+      genero: "hombre",
   },
   {
       name: "Juan123",
       nombre: "Juan Carlos",
       password: '1234',
-      amount: 300,
+      amount: 500,
+      genero: "hombre",
   },
   {
       name: "Pedro123",
       nombre: "Pedro",
       password: '1234',
-      amount: 300,
+      amount: 450,
+      genero: "hombre",
   }
 ] 
 function obtenerLocalStorage(key='indexUser') {
@@ -54,6 +58,27 @@ function validacion() {
      // alert ("Ingrese usuario y contraseña válidos");
   }
 }
+
+//Funciones de genero
+if (users[indexUser].genero == "hombre") {
+  document.getElementById('genero').innerHTML = "o";
+} else {
+  document.getElementById('genero').innerHTML = "a";
+}
+
+// Funciones para borrar la alerta de montos mínimos y máximos
+function appearingErrorDeposito(){
+  setTimeout(function(){ 
+    document.getElementById("wrong_deposito").innerHTML = "";
+}, 3000); 
+}
+
+function appearingErrorRetiro(){
+  setTimeout(function(){ 
+    document.getElementById("wrong_retiro").innerHTML = "";
+}, 3000); 
+}
+
 //Boton Depósito event handler
 const deposito_btn = document.getElementById('depositar');
 const saldo = document.getElementById("saldo-actual");
@@ -63,12 +88,13 @@ deposito_btn.addEventListener('click', function(){
       updateSpanTest("saldo-actual", depositStringToInt);
       users[indexUser].amount += depositStringToInt;
   } else {
-   //document.getElementById('wrong_deposito').innerHTML = "El saldo total no puede superar los US$990.";
-  alert("El saldo total no puede superar los US$990.");
+  document.getElementById("wrong_deposito").innerHTML = "El saldo total no puede superar los US$990.";  
+   // alert("El saldo total no puede superar los US$990.");  
+  //return appearingErrorDeposito();
   }
   //setting up the input field blank when clicked
   document.getElementById('monto-deposito').value = "";
-  //document.getElementById("wrong-deposito").value = "";
+  return appearingErrorDeposito();
 }) 
 //Boton Retiro event handler
 const retiro_btn = document.getElementById('retirar');
@@ -79,10 +105,12 @@ retiro_btn.addEventListener('click', function(){
       updateSpanTest("saldo-actual", -1 * retiroNumb);
       users[indexUser].amount -= retiroNumb;
   } else {
-      alert("El saldo total no puede ser inferior a US$10.");
+    document.getElementById("wrong_retiro").innerHTML = "El saldo total no puede ser inferior a US$10.";
+     // alert("El saldo total no puede ser inferior a US$10.");
   }
   //setting up the input field blank when clicked
   document.getElementById('monto-retiro').value = "";
+  return appearingErrorRetiro();
 })
 //function to parse string input to int
 function getInputNumb(idName){
