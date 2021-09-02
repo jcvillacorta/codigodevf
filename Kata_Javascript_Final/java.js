@@ -69,18 +69,24 @@ if (users[indexUser].genero == "hombre") {
   document.getElementById('genero').innerHTML = "a";
 }
 
-// Funciones para borrar la alerta de montos mínimos y máximos
-function appearingErrorDeposito(){
-  setTimeout(function(){ 
-    document.getElementById("wrong_deposito").innerHTML = "";
-}, 3000); 
-}
+//Prueba de animación error
+const animateCSS = (element, animation, prefix = 'animate__') =>
+  // We create a Promise and return it
+  new Promise((resolve, reject) => {
+    const animationName = `${prefix}${animation}`;
+    const node = document.querySelector(element);
 
-function appearingErrorRetiro(){
-  setTimeout(function(){ 
-    document.getElementById("wrong_retiro").innerHTML = "";
-}, 3000); 
-}
+    node.classList.add(`${prefix}animated`, animationName);
+
+    // When the animation ends, we clean the classes and resolve the Promise
+    function handleAnimationEnd(event) {
+      event.stopPropagation();
+      node.classList.remove(`${prefix}animated`, animationName);
+      resolve('Animation ended');
+    }
+
+    node.addEventListener('animationend', handleAnimationEnd, {once: true});
+  });
 
 //Boton Depósito event handler
 const deposito_btn = document.getElementById('depositar');
@@ -90,14 +96,16 @@ deposito_btn.addEventListener('click', function(){
   if (users[indexUser].amount + depositStringToInt <= 990) {
       updateSpanTest("saldo-actual", depositStringToInt);
       users[indexUser].amount += depositStringToInt;
+      document.getElementById('monto-deposito').placeholder = "Ingresa la cantidad a depositar";
   } else {
-  document.getElementById("wrong_deposito").innerHTML = "El saldo total no puede superar los US$990.";  
+    animateCSS('#monto-deposito', 'shakeX').then((message) => {
+      // Do something after the animation
+    });  
+    document.getElementById("monto-deposito").placeholder = "El saldo total no puede superar los US$990.";
    // alert("El saldo total no puede superar los US$990.");  
-  //return appearingErrorDeposito();
   }
   //setting up the input field blank when clicked
-  document.getElementById('monto-deposito').value = "";
-  return appearingErrorDeposito();
+  document.getElementById('monto-deposito').value = "Ingresa la cantidad a depositar";
 }) 
 //Boton Retiro event handler
 const retiro_btn = document.getElementById('retirar');
@@ -107,13 +115,16 @@ retiro_btn.addEventListener('click', function(){
   if (users[indexUser].amount - retiroNumb >= 10) {
       updateSpanTest("saldo-actual", -1 * retiroNumb);
       users[indexUser].amount -= retiroNumb;
+      document.getElementById('monto-retiro').placeholder = "Ingresa la cantidad a depositar";
   } else {
-    document.getElementById("wrong_retiro").innerHTML = "El saldo total no puede ser inferior a US$10.";
+    animateCSS('#monto-retiro', 'shakeX').then((message) => {
+      // Do something after the animation
+    }); 
+    document.getElementById("monto-retiro").placeholder = "El saldo total no puede ser inferior a US$10.";
      // alert("El saldo total no puede ser inferior a US$10.");
   }
   //setting up the input field blank when clicked
   document.getElementById('monto-retiro').value = "";
-  return appearingErrorRetiro();
 })
 //function to parse string input to int
 function getInputNumb(idName){
