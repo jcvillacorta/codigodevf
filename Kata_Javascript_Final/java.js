@@ -1,6 +1,6 @@
 const users = [
   {   
-      name: "usuario1",
+      name: "Fatima123",
       nombre: "Fátima",
       password: "1234",
       amount: 300,
@@ -45,11 +45,13 @@ function validacion() {
   var usuario = document.getElementById("exampleInputUser").value
   var contraseña = document.getElementById("exampleInputPassword").value
   if (getNameAndPass(usuario, contraseña)) {
-      window.alert ("Inicio exitoso");
+    document.getElementById('good').innerHTML = "Inicio exitoso";
+      //window.alert ("Inicio exitoso");
       window.location = "usuario1.html";
       console.log(obtenerLocalStorage(key='indexUser'));
   } else {
-      alert ("Ingrese usuario y contraseña válidos");
+    document.getElementById('wrong').innerHTML = "Ingrese usuario y contraseña válidos";
+     // alert ("Ingrese usuario y contraseña válidos");
   }
 }
 //Boton Depósito event handler
@@ -61,10 +63,12 @@ deposito_btn.addEventListener('click', function(){
       updateSpanTest("saldo-actual", depositStringToInt);
       users[indexUser].amount += depositStringToInt;
   } else {
-      alert("El saldo total no puede superar los US$990.");
+   //document.getElementById('wrong_deposito').innerHTML = "El saldo total no puede superar los US$990.";
+  alert("El saldo total no puede superar los US$990.");
   }
   //setting up the input field blank when clicked
   document.getElementById('monto-deposito').value = "";
+  //document.getElementById("wrong-deposito").value = "";
 }) 
 //Boton Retiro event handler
 const retiro_btn = document.getElementById('retirar');
@@ -94,17 +98,3 @@ function updateSpanTest(idName, addedNumber){
   //x1.2 setting this value in balance
   document.getElementById(idName).innerText = total;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
