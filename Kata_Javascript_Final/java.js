@@ -1,197 +1,79 @@
-const usuarios = [
-{   
-    name: "Fátima",
-    user: "usuario1",
-    pass: "12345",
-    amount: 300,
-},
-{   
-  name: "Diego",
-  user: "usuario2",
-  pass: "12345",
-  amount: 200,
-}
-];
-
-function getNameAndPass (username, key) {
-  for (let i = 0; i < users.length; i++) {
-      if (usuarios[i].user == username && usuarios[i].pass == key) {
-          var indexUser = i;
-          document.getElementById('name').innerHTML = `${users[indexUser].name}`;
-          document.getElementById('saldo-actual').innerHTML = `${users[indexUser].amount}`;
-          return true;
-      }
-  } return false
-}
-localStorage.setItem(indexUser);
-function validacion() {
-  var usuario = document.getElementById("exampleInputUser").value
-  var contraseña = document.getElementById("exampleInputPassword").value
-  if (getNameAndPass(usuario, contraseña)) {
-      window.alert ("Inicio exitoso");
-      window.location.replace ("usuario1.html");
-  } else {
-      alert ("Ingrese usuario y contraseña válidos");
-  }
-}
-
-/*function validacion() {
-  var usuario = document.getElementById("exampleInputUser").value
-  var contraseña = document.getElementById("exampleInputPassword").value
-
-  for (var i = 0; i < usuarios.length; i++) {
-    if(usuario == usuarios[i].user && contraseña == usuarios[i].pass) {
-      window.alert ("Inicio exitoso");
-      window.location = "usuario1.html";
-      usuarios = usuarios[i];
-      break;
-    }else{
-      alert('Ingrese usuario y contraseña válidos');
-    }
- }
-}*/
-
-/*
-function validacion() {
-    var usuario = document.getElementById("exampleInputUser").value
-    var contraseña = document.getElementById("exampleInputPassword").value
-
-    if (usuario == usuarios.user && contraseña == usuarios.pass){
-      window.alert ("Inicio exitoso");
-      window.location = "usuario1.html";
-    } else if (usuario == "usuario4" && contraseña == "12345"){
-        window.alert ("Inicio exitoso");
-        window.location.replace ("usuario2.html");
-    } else if (usuario == "usuario3" && contraseña == "12345"){
-        window.alert ("Inicio exitoso");
-        window.location.replace ("usuario3.html");
-    }
-    else {
-      alert ("Ingrese usuario y contraseña válidos")
-    }
-  }
-*/
-
-  document.getElementById("name").innerHTML = usuarios.name;
-  document.getElementById("saldo-actual").innerHTML = usuarios.amount;
-
-//Boton Depósito event handler
-const deposito_btn = document.getElementById('depositar');
-var saldo = document.getElementById("saldo-actual");
-deposito_btn.addEventListener('click', function(){
-
-    const depositStringToInt = getInputNumb("monto-deposito");
-    if (usuario1.amount + depositStringToInt <= 990) {
-    updateSpanTest("saldo-actual", depositStringToInt);
-    usuario1.amount += depositStringToInt;
-  } else {
-    alert("El saldo total no puede ser mayor a US$990.");
-  }
-  //setting up the input field blank when clicked
-  document.getElementById('monto-deposito').value = "";
-  
-}) 
-
-
-//Boton Retiro event handler
-const retiro_btn = document.getElementById('retirar');
-retiro_btn.addEventListener('click', function(){
-
-    const retiroNumb = getInputNumb("monto-retiro");
-
-    if (usuario1.amount - retiroNumb >= 10) {
-  updateSpanTest("saldo-actual", -1 * retiroNumb);
-  usuario1.amount -= retiroNumb;
-} else {
-  alert("El saldo total no puede ser inferior a US$10.");
-}
-
-    //setting up the input field blank when clicked
-    document.getElementById('monto-retiro').value = "";
-
-})
-
-  //function to parse string input to int
-function getInputNumb(idName){
-  const amount = document.getElementById(idName).value;
-  const amountNumber = parseFloat(amount);
-  return amountNumber;
-}
-
-function updateSpanTest(idName, addedNumber){
-  //x1.1 updating balance the same way
-  const current = document.getElementById(idName).innerText;
-  const currentStringToInt = parseFloat(current);
-
-  const total = currentStringToInt + addedNumber;
-
-  //x1.2 setting this value in balance
-  document.getElementById(idName).innerText = total;
-}
-/*
 const users = [
   {   
-      name: "Fatima123",
+      name: "usuario1",
+      nombre: "Fátima",
       password: "1234",
       amount: 300,
   },
   {
       name: "Diego123",
+      nombre: "Diego",
       password: '1234',
       amount: 300,
   },
   {
       name: "Juan123",
+      nombre: "Juan Carlos",
       password: '1234',
       amount: 300,
   },
   {
       name: "Pedro123",
+      nombre: "Pedro",
       password: '1234',
       amount: 300,
   }
-]
-var indexUser;
+] 
+function obtenerLocalStorage(key='indexUser') {
+  return localStorage.getItem(key);
+}
+function save_storage(i) {
+  localStorage.setItem('indexUser', i)
+}
+var indexUser = obtenerLocalStorage();
+document.getElementById('name').innerHTML = `${users[indexUser].nombre}`;
+document.getElementById('saldo-actual').innerHTML = `${users[indexUser].amount}`;
 function getNameAndPass (username, key) {
   for (let i = 0; i < users.length; i++) {
       if (users[i].name == username && users[i].password == key) {
-          indexUser = i;
-          //document.getElementById('name').innerHTML = `${users[indexUser].name}`;
-          //document.getElementById('saldo-actual').innerHTML = `${users[indexUser].amount}`;
+          save_storage(i);
           return true;
       }
-  } return false
+  } return false;
 }
 function validacion() {
   var usuario = document.getElementById("exampleInputUser").value
   var contraseña = document.getElementById("exampleInputPassword").value
   if (getNameAndPass(usuario, contraseña)) {
       window.alert ("Inicio exitoso");
-      window.location.replace ("usuario1.html");
+      window.location = "usuario1.html";
+      console.log(obtenerLocalStorage(key='indexUser'));
   } else {
       alert ("Ingrese usuario y contraseña válidos");
   }
 }
-
 //Boton Depósito event handler
 const deposito_btn = document.getElementById('depositar');
 const saldo = document.getElementById("saldo-actual");
 deposito_btn.addEventListener('click', function(){
   const depositStringToInt = getInputNumb("monto-deposito");
-  if (users[i].amount + depositStringToInt < 990) {
+  if (users[indexUser].amount + depositStringToInt <= 990) {
       updateSpanTest("saldo-actual", depositStringToInt);
+      users[indexUser].amount += depositStringToInt;
   } else {
       alert("El saldo total no puede superar los US$990.");
   }
-//setting up the input field blank when clicked
-document.getElementById('monto-deposito').value = "";
+  //setting up the input field blank when clicked
+  document.getElementById('monto-deposito').value = "";
 }) 
 //Boton Retiro event handler
 const retiro_btn = document.getElementById('retirar');
 retiro_btn.addEventListener('click', function(){
   const retiroNumb = getInputNumb("monto-retiro");
-  if (users[i].amount - retiroNumb > 10) {
+  console.log(retiroNumb)
+  if (users[indexUser].amount - retiroNumb >= 10) {
       updateSpanTest("saldo-actual", -1 * retiroNumb);
+      users[indexUser].amount -= retiroNumb;
   } else {
       alert("El saldo total no puede ser inferior a US$10.");
   }
@@ -200,21 +82,18 @@ retiro_btn.addEventListener('click', function(){
 })
 //function to parse string input to int
 function getInputNumb(idName){
-const amount = document.getElementById(idName).value;
-const amountNumber = parseFloat(amount);
-return amountNumber;
+  const amount = document.getElementById(idName).value;
+  const amountNumber = parseFloat(amount);
+  return amountNumber;
 }
 function updateSpanTest(idName, addedNumber){
-//x1.1 updating balance the same way
-const current = document.getElementById(idName).innerText;
-const currentStringToInt = parseFloat(current);
-const total = currentStringToInt + addedNumber;
-//x1.2 setting this value in balance
-document.getElementById(idName).innerText = total;
+  //x1.1 updating balance the same way
+  const current = document.getElementById(idName).innerText;
+  const currentStringToInt = parseFloat(current);
+  const total = currentStringToInt + addedNumber;
+  //x1.2 setting this value in balance
+  document.getElementById(idName).innerText = total;
 }
-
-*/
-
 
 
 
