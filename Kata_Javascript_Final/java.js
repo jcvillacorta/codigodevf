@@ -27,16 +27,19 @@ const users = [
       amount: 450,
       genero: "hombre",
   }
-] 
-function obtenerLocalStorage(key='indexUser') {
-  return localStorage.getItem(key);
-}
+]
+
 function save_storage(i) {
   localStorage.setItem('indexUser', i)
 }
+
+function obtenerLocalStorage(key='indexUser') {
+  return localStorage.getItem(key);
+}
+
 var indexUser = obtenerLocalStorage();
-document.getElementById('name').innerHTML = `${users[indexUser].nombre}`;
-document.getElementById('saldo-actual').innerHTML = `${users[indexUser].amount}`;
+document.getElementById('name').innerHTML = users[indexUser].nombre;
+document.getElementById('saldo-actual').innerHTML = users[indexUser].amount;
 function getNameAndPass (username, key) {
   for (let i = 0; i < users.length; i++) {
       if (users[i].name == username && users[i].password == key) {
