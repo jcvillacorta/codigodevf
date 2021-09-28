@@ -20,8 +20,7 @@ class Queue {
     }
 // último elemento
     back () {
-        const lastItem = this.queue[this.queue.length - 1]
-        return lastItem
+        this.queue[this.queue.length-1]
     }
 // retorna la queue
     print () {
@@ -29,7 +28,7 @@ class Queue {
     }
 // valida si está vacío o no
     isEmpty () {
-        return this.queue.length === 0
+        return this.size === 0
     }
 
 }
