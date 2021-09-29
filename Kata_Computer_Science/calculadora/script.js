@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     
     Normal_btn.forEach((Normal_btn, index)=>{
     Normal_btn.addEventListener('click', function(){
-    let text = this.innerHTML;
-    initial_value += text;
+    let text = this.innerHTML; 
+    initial_value += text; //añade el valor de la derecha
     result.innerHTML = initial_value;
     });
     });
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     equalTo.addEventListener('click', function(){
     if (result.innerHTML != "") {
     history.innerHTML = result.innerHTML;
-    result.innerHTML = eval(result.innerHTML);
+    result.innerHTML = eval(result.innerHTML); //eval es el que hace el cálculo matemático
     initial_value = eval(result.innerHTML);
     }else{
     alert('Por favor, ingresa un número');
