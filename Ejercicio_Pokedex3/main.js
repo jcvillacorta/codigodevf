@@ -1,22 +1,16 @@
 const pokemonContainer = document.querySelector(".row")
 const searchInput = document.getElementById('search');
 
-/*function fetchPokemon(id) {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-    .then(res => res.json())
-    .then(data => createPokemon(data))
-}*/
-
-const fetchPokemon = async id =>{
+async function fetchPokemon(id) {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`
   const res = await fetch(url)
   const pokemon = await res.json()
   createPokemon(pokemon)
 }
 
-function fetchPokemons(number) {
+async function fetchPokemons(number) {
     for (let i=1; i <= number; i++) {
-        fetchPokemon(i)
+    await  fetchPokemon(i)
     }
 }
 
