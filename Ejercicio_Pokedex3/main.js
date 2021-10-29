@@ -8,10 +8,19 @@ async function fetchPokemon(id) {
   createPokemon(pokemon)
 }
 
+/*async function getSpecies(id) {
+  const url2 = `https://pokeapi.co/api/v2/pokemon-species/${id}`
+  const res = await fetch(url2)
+  return await res.json()
+}
+*/
+
+
 async function fetchPokemons(number) {
-    for (let i=1; i <= number; i++) {
-    await  fetchPokemon(i)
-    }
+  for (let i=1; i <= number; i++) {
+  await  fetchPokemon(i)
+  //  await getSpecies(i)
+  }
 }
 
 function createPokemon (pokemon) {
@@ -25,7 +34,8 @@ function createPokemon (pokemon) {
     spriteContainer.classList.add("img-container")
 
     const sprite = document.createElement("img")
-    sprite.src = pokemon.sprites.other.dream_world.front_default
+    sprite.classList.add("imagen")
+    sprite.src = pokemon.sprites.other.home.front_default
 
     spriteContainer.appendChild(sprite) //para crear un fondo de la imagen
 
@@ -81,6 +91,7 @@ function createPokemon (pokemon) {
 
     const modalBody = document.createElement("div")
     modalBody.classList.add("modal-body")
+   //  modalBody.appendChild(descripcionPokemon (pokemon2.descripcion2))
     modalBody.appendChild(renderPokemonTipo(pokemon.types))
     modalBody.appendChild(progressBars(pokemon.stats))
 
@@ -147,6 +158,22 @@ function renderPokemonTipo (types){
 
     return tipoContainer
 }
+
+// crear función para mostrar descripción de pokemon
+/*
+function descripcionPokemon (){
+  const descripcionContainer = document.createElement("div");
+  descripcionContainer.classList.add("descripcion-container");
+  const species = getSpecies(2)
+  const descripcion = species.flavor_text_entries.flavor_text
+  console.log = descripcion
+  descripcionTextElement.textContent = descripcion
+  descripcionContainer.appendChild(descripcionTextElement)
+
+  return descripcionContainer
+}
+
+descripcionPokemon()*/
 
 fetchPokemons(151)
 
