@@ -135,12 +135,9 @@ having count (distinct sku) = (select count(*) from groceries)
 
 --j. Cantidad de productos vendidos a clientes de Guadalajara, Cancún y Monterrey.
 
-select quantity, description, s.sku
-from customers as c
-inner join sales as s
-on c.customer_id=s.customer_id
-inner join groceries as g
-on g.sku=s.sku
-where postal_code='Guadalajara' and quantity in (select sku from customers natural join sales where postal_code='Cancun') 
-and quantity in (select sku from customers natural join sales where postal_code='Monterrey')
--- sobre esta última no sé si el resultado es correcto
+select sum(quantity)
+from sales
+join customers
+on sales.customer_id=customers.customer_id
+where postal_code in ('Guadalajara', 'Cancun', 'Monterrey')
+-- consulta con respuesta correcta: 81
