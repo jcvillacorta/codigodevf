@@ -1,10 +1,6 @@
 const ModelGroceries = require('../models/Groceries');
 
 const createGrocery = (req, res) => {
-    // Aquí yo debería crear mi Home
-    //res.send({ message: 'Home Creado (Fake)'})
-
-    // Validar que todo esté bien y ejecutar el create de mi Modelo
     ModelGroceries.create(req.body)
         .then((row)=>{
             res.status(201).send(row);
@@ -14,6 +10,50 @@ const createGrocery = (req, res) => {
         })
 }
 
+const findAllGroceries = (req, res) => {
+    ModelGroceries.findAllGroceries()
+        .then((row)=>{
+            res.status(200).send(row);
+        })
+        .catch((err)=>{
+            res.status(400).send(err.message);
+        })
+}
+
+const findOneGrocery = (req, res) => {
+    ModelGroceries.findOneGrocery(req.params.sku_id)
+        .then((row)=>{
+            res.status(200).send(row);
+        })
+        .catch((err)=>{
+            res.status(400).send(err.message);
+        })
+}
+
+const updateOneGrocery = (req, res) => {
+    ModelGroceries.update(req.params.sku_id, req.body)
+        .then((row)=>{
+            res.status(200).send(row);
+        })
+        .catch((err)=>{
+            res.status(400).send(err.message);
+        })
+}
+
+const destroyOneGrocery = (req, res) => {
+    ModelGroceries.destroy(req.params.sku_id)
+        .then(()=>{
+            res.status(204).send();
+        })
+        .catch((err)=>{
+            res.status(400).send(err.message);
+        })
+}
+
 module.exports = {
     createGrocery,
+    findAllGroceries,
+    findOneGrocery,
+    updateOneGrocery,
+    destroyOneGrocery
 }

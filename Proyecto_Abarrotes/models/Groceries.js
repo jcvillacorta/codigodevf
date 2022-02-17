@@ -14,49 +14,52 @@ const create = (bodyGrocery) =>{
         .into('groceries') // ¿De qué tabla? - Homes
         .returning(['sku', 'name', 'description', 'price'])
 }
-// Hago la funcion para listar todas las casas que ya creé
-const findAll = () => { 
+// Hago la funcion para listar todas las groceries que ya creé
+const findAllGroceries = () => { 
     // Como quiero todos los registros, no le paso ningún parámetro
     return knex
-        .select(['house_id', 'title', 'description', 'guests', 'address', 'active', 'created_at'])
-        .from('homes')
+        .select(['sku', 'name', 'description', 'price'])
+        .from('groceries')
 }
 // Hago funcion para listar un solo registro con su id
-const findOne = (houseId) =>{
-    // Select title, description ... etc From 'homes' Where house_id = houseId
+const findOneGrocery = (sku_id) =>{
     return knex
-        .select(['house_id', 'title', 'description', 'guests', 'address', 'active', 'created_at'])
-        .from('homes')
-        .where({house_id: houseId});
+        .select(['sku', 'name', 'description', 'price'])
+        .from('groceries')
+        .where({sku: sku_id});
 }
 
 // Hago funcion update
-const update = (houseId, bodyToUpdate) => {
+const update = (sku_id, bodyToUpdate) => {
     // necesito el id y la información que voy a actualizar
     return knex
         .update(bodyToUpdate) // la información a actualizar
-        .from('homes')
-        .where({house_id: houseId})
-        .returning(['house_id', 'title', 'description', 'guests', 'address', 'active', 'created_at'])
+        .from('groceries')
+        .where({sku: sku_id})
+        .returning(['sku', 'name', 'description', 'price'])
 }
 
 // Hago funcion borrado real
-const destroy = (houseId) =>{
+const destroy = (sku_id) =>{
     return knex
         .del() //delete
-        .from('homes')
-        .where({house_id: houseId})
+        .from('groceries')
+        .where({sku: sku_id})
 }
 
 // Hago funcion borrado logico/ Cambio de true a false
-const softDelete = (houseId) =>{
-    return knex
-        .update({active: false})
-        .from('homes')
-        .where({house_id: houseId})
-}
+// const softDelete = (houseId) =>{
+//     return knex
+//         .update({active: false})
+//         .from('homes')
+//         .where({house_id: houseId})
+// }
 
 // Paso 3. Exportar mis funciones para que sean accesibles desde el controlador
 module.exports = {
-    create
+    create,
+    findAllGroceries,
+    findOneGrocery,
+    update,
+    destroy
 }
