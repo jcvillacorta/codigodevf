@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express') // traemos el módulo y lo guardamos en la const express
 // Importar las rutas de mi vista de Groceries
 const groceriesRoutes =  require('./routes/groceriesRoutes');
