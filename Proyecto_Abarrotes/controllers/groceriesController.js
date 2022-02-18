@@ -10,6 +10,16 @@ const createGrocery = (req, res) => {
         })
 }
 
+const createCustomer = (req, res) => {
+    ModelGroceries.createCustomer(req.body)
+        .then((row)=>{
+            res.status(201).send(row);
+        })
+        .catch((err)=>{
+            res.status(400).send(err.message);
+        })
+}
+
 const findAllGroceries = (req, res) => {
     ModelGroceries.findAllGroceries()
         .then((row)=>{
@@ -52,6 +62,7 @@ const destroyOneGrocery = (req, res) => {
 
 module.exports = {
     createGrocery,
+    createCustomer,
     findAllGroceries,
     findOneGrocery,
     updateOneGrocery,

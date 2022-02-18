@@ -6,14 +6,20 @@ const knex = require ('../config');
 
 // Paso2. Crear una función que traiga los datos que yo requiera de la base de datos
 const create = (bodyGrocery) =>{
-    // Crear un registro en la tabla Homes
-    // bodyHome es un objeto que contiene los valores a insertar
-
     return knex
         .insert(bodyGrocery) // ¿Qué datos voy a insertar? { title: 'titulo0, address: 'x'}
         .into('groceries') // ¿De qué tabla? - Homes
         .returning(['sku', 'name', 'description', 'price'])
 }
+
+// Crear para tabla customers
+const createCustomer = (bodyCustomer) =>{
+    return knex
+        .insert(bodyCustomer) // ¿Qué datos voy a insertar? { title: 'titulo0, address: 'x'}
+        .into('customers') // ¿De qué tabla? - Homes
+        .returning(['customer_id', 'first_name', 'last_name', 'email', 'phone', 'address', 'suburb', 'postal_code'])
+}
+
 // Hago la funcion para listar todas las groceries que ya creé
 const findAllGroceries = () => { 
     // Como quiero todos los registros, no le paso ningún parámetro
@@ -58,6 +64,7 @@ const destroy = (sku_id) =>{
 // Paso 3. Exportar mis funciones para que sean accesibles desde el controlador
 module.exports = {
     create,
+    createCustomer,
     findAllGroceries,
     findOneGrocery,
     update,
