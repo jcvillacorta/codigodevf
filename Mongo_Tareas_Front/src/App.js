@@ -1,37 +1,28 @@
+import React, {useState} from "react";
+import {Route, Routes} from "react-router-dom";
+import TaskList from "./scenes/TaskList/TaskList";
+import AuthView from "./scenes/AuthView/AuthView";
 import './App.css';
-import React, {useState} from 'react';
+import Login from "./components/Login";
+import SignUp from "./components/SignUp";
 
 function App() {
-  const [value, setValue] = useState('')
+  const [token, isToken] = useState(null);
+  const [name, isName] = useState(null)
+
+
   return (
     <div className="app">
-      <header className="app-header">
-      <div className='task-input__container'>
-       <div className="task-input">
-        <input 
-        type="text" 
-        className='task-input__text'
-        value={value}
-        onChange={(e)=> {
-          setValue(e.target.value)
-        }}
-        />
-       </div>
-       <button 
-       onClick={() => console.log('Agregar Tarea')}
-       className='task-input__btn'>Ingresar Tarea</button>
-      </div>
-       <div className='task'>
-         <p>Esta es una tarea</p>
-       </div>
-       <div className='task'>
-         <p>Esta es una tarea</p>
-       </div>
-       <div className='task'>
-         <p>Esta es una tarea</p>
-       </div>
-    
-      </header>
+    <header className="app-header">
+    <Routes>
+    <Route path="/" element={<TaskList token={token} name={name} />} />
+    <Route path="auth" element={<AuthView setToken={isToken} setName={isName}/>}>
+      <Route index element={<Login setToken={isToken} setName={isName} />}/>
+      <Route path="login" element={<Login setToken={isToken} setName={isName} />} />
+      <Route path="signup" element={<SignUp />} />
+    </Route>
+    </Routes>
+    </header>
     </div>
   );
 }
